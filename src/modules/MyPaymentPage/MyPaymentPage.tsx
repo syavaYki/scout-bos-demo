@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
-import {
-  Block,
-  Box,
-  Button,
-  Columns,
-  Form,
-  Heading,
-} from 'react-bulma-components';
+import { Block, Box, Columns, Form, Heading } from 'react-bulma-components';
 import { ModalError } from '../../components/ModalError';
 import { ModalSuccess } from '../../components/ModalSuccess';
 import { ModalLoader } from '../../components/ModalLoader';
@@ -35,6 +28,7 @@ export const MyPaymentPage = () => {
   const [error, setError] = useState('');
   const [paymentCompleted, setPaymentCompleted] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function handlePayment() {
     if (!otherValSelDisbale) {
       setSelectedPaymentAmount(otherVal);
