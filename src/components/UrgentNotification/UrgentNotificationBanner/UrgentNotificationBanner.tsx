@@ -1,5 +1,5 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import { Box, Button, Heading, Notification } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import { accessLocalStorage } from '../../../utils/accessLocalStorage';
@@ -15,7 +15,6 @@ export const UrgentNotificationBanner: React.FC<Props> = ({
   data,
 }) => {
   const [show, setShow] = React.useState(true);
-
   return (
     <>
       {show && data && (
@@ -36,11 +35,18 @@ export const UrgentNotificationBanner: React.FC<Props> = ({
               }}
             ></button>
 
-            <Heading className="pb-6" size={3}>
+            <Heading
+              className="pb-6"
+              size={3}
+            >
               {data.title}
             </Heading>
 
-            <Heading subtitle size={6} className="pb-0">
+            <Heading
+              subtitle
+              size={6}
+              className="pb-0"
+            >
               {data.shortDescription}
             </Heading>
 

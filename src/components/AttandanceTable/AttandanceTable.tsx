@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ClientSideRowModelModule,
   ColDef,
@@ -90,10 +90,9 @@ export const AttandanceTable: React.FC<Prop> = ({
         (data as AttendanceTableData[]).filter(
           (item: AttendanceTableData) => item.ulad === uladSelected,
         );
-
       setRowData(filtered);
     }
-  }, [uladSelected, data]);
+  }, [uladSelected]);
 
   useEffect(() => {
     setUlads(
@@ -105,7 +104,7 @@ export const AttandanceTable: React.FC<Prop> = ({
     setRowData(data);
 
     setDateSelected(validateDate(sheetDate));
-  }, [data, sheetDate]);
+  }, [data]);
 
   function handleAction() {
     return onAction({
@@ -155,7 +154,10 @@ export const AttandanceTable: React.FC<Prop> = ({
                 <option value="All">All</option>
                 {Array.from(ulads).map((item: string, index: number) => {
                   return (
-                    <option key={index} value={item}>
+                    <option
+                      key={index}
+                      value={item}
+                    >
                       {item}
                     </option>
                   );

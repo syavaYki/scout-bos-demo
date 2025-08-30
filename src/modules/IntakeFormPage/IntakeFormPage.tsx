@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { IntakeForm } from '../../components/IntakeForm';
 import { submitIntakeForm } from '../../api/newIntake';
 import { ModalError } from '../../components/ModalError';
@@ -34,7 +34,6 @@ export const IntakeFormPage = () => {
       setLoading(false);
     }
   }
-
   return (
     <>
       {showError && (

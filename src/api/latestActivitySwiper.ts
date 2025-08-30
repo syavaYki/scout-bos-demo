@@ -24,10 +24,9 @@ const GET_IMG_DATA = gql`
   }
 `;
 
-export function UseGetLatestActivitiesAPI() {
+export function getLatestActivitiesAPI() {
   return useQuery<LatestActivitiesData>(GET_IMG_DATA, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('error:', error);
     },
   });

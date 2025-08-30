@@ -18,11 +18,10 @@ const GET_IMG_DATA = gql`
   }
 `;
 
-export function UseGetMainSwiperPhotoBlocks() {
+export function getMainSwiperPhotoBlocks() {
   return useQuery(GET_IMG_DATA, {
     variables: { title: 'Main Photo Slider' },
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Error:', error);
     },
   });

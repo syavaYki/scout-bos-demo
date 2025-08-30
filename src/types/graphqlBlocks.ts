@@ -7,7 +7,7 @@ export type ImageBlock = {
   __typename: 'CoreImage';
 };
 
-export type PostDetailsBlock = {
+export type postDetailsBlock = {
   attributes: {
     url: string;
     id: number;

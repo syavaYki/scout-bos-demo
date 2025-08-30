@@ -18,9 +18,7 @@ export const parseCalendarEvents = (data: Events): EventData[] | [] => {
         })
         .sort((a, b) => b.dateTime.getTime() - a.dateTime.getTime());
     }
-
     return [];
   }
-
   return [];
 };

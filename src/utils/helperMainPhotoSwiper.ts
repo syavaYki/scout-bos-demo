@@ -10,6 +10,5 @@ export function parseMainPhotoSwiperData(data: Data): ImageAPIData[] {
 
     return blocks || [];
   }
-
   return [];
 }

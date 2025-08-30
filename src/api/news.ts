@@ -19,10 +19,9 @@ const GET_LATEST_NEWS = gql`
   }
 `;
 
-export function UseGetNewsAPI() {
+export function getNewsAPI() {
   return useQuery(GET_LATEST_NEWS, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('ERROR:', error);
     },
   });

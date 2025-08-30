@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaymentTable } from '../PaymentTable';
 import { User } from '../../types/User';
-import { UseGetPayments } from '../../api/payments';
+import { getPayments } from '../../api/payments';
 import { buildTableRow } from '../../utils/helperPayments';
 import { ErrorLoadAPINotice } from '../ErrorLoadAPINotice';
 
@@ -13,10 +13,7 @@ export const UsersPaymentTable: React.FC<Props> = ({
   user,
   compactView = true,
 }) => {
-  const { error, payments } = UseGetPayments(
-    user ? String(user.id) : undefined,
-  );
-
+  const { error, payments } = getPayments(user ? String(user.id) : undefined);
   return (
     <>
       {!!error && <ErrorLoadAPINotice />}

@@ -7,7 +7,7 @@ export type LeaderData = {
   imgUrl: string | undefined;
 };
 
-export enum ValidUlad {
+export enum validUlad {
   STARSHYNA = 'Станична Старшина',
 }
 

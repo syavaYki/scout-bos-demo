@@ -1,4 +1,4 @@
-export enum ValidRoutes {
+export enum VALID_ROUTES {
   HOME = 'home',
   INTAKE_APLICATION = 'intake-application',
   LOGIN = 'login',

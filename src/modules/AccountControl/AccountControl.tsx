@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import { Box, Button, Columns } from 'react-bulma-components';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,7 +14,6 @@ export const AccountControl = () => {
   const { accessLevel } = useAppSelector(state => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
-
   return (
     <Box className={classNames(style.container)}>
       <Columns>
@@ -35,7 +35,10 @@ export const AccountControl = () => {
                   onClick={() => navigate(`${location.pathname}/${item.link}`)}
                 >
                   <span className="icon-text is-large">
-                    <FontAwesomeIcon icon={item?.icon} size="lg" />
+                    <FontAwesomeIcon
+                      icon={item?.icon}
+                      size="lg"
+                    />
                     <span className="ml-2">{item.name}</span>
                   </span>
                 </Button>

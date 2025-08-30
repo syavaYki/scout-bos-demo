@@ -15,10 +15,9 @@ const GET_MESSAGE_DATA = gql`
   }
 `;
 
-export const useUrgenNoticeApi = () => {
+export const urgenNoticeApi = () => {
   return useQuery(GET_MESSAGE_DATA, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Error:', error);
     },
   });

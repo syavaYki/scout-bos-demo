@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import style from './ModalLoader.module.scss';
 import { Loader } from '../Loader';

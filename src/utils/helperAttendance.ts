@@ -14,21 +14,17 @@ export function attendanceParser(
 
     data.attendances.nodes.forEach(item => {
       let titleDateValue: Date | string = 'NO DATE';
-
       if (dateRegex.test(item.title)) {
         titleDateValue = new Date(item.title).toISOString().split('T')[0];
       }
-
       const itemData: AttandancSheetsData = {
         titleDate: titleDateValue,
         body: item.attendantsCardFields.data ?? '',
         id: item.databaseId,
       };
-
       dataArr.push(itemData);
     });
   }
-
   return dataArr;
 }
 
@@ -51,16 +47,15 @@ export function parseTableItems(data: {
   try {
     if (data?.attendance?.attendantsCardFields?.data) {
       const parsedBody = JSON.parse(data.attendance.attendantsCardFields.data);
-
       parsedData.body = parsedBody;
     }
   } catch (error) {
+    console.error(error);
     return {
       title: parsedData.title,
       id: parsedData.id,
       body: [],
     };
   }
-
   return parsedData;
 }

@@ -6,7 +6,6 @@ export function parseApi(data: UrgentNotices): UrgentNoticeData | undefined {
   if (data) {
     if (data.urgentNotices.nodes.length > 0) {
       const rawData = data.urgentNotices.nodes[0].urgentNoticeFields;
-
       parsedData = {
         title: rawData.title || '',
         shortDescription: rawData.shortDescription || '',

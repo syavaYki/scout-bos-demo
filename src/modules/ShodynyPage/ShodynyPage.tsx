@@ -1,10 +1,10 @@
+import React from 'react';
 import { Button } from 'react-bulma-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const ShodynyPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   return (
     <Button.Group
       size={'medium'}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import * as authActions from '../../features/authentication';
@@ -12,9 +12,8 @@ export default function LogOutPage() {
   useEffect(() => {
     logoutMutation();
     dispatch(authActions.actions.unAuth());
-  }, [dispatch, logoutMutation]);
+  }, []);
 
   navigate('/');
-
   return <></>;
 }

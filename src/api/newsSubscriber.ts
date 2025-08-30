@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export function submitNewSubscriber(email: string) {
-  const fullUrl = `${import.meta.env.VITE_REST_FORM_API_BASE_URL}${import.meta.env.VITE_NEWS_SUBSCR_FORM_ID}/feedback`;
-
+  const fullUrl = `${process.env.REACT_APP_REST_FORM_API_BASE_URL}${process.env.REACT_APP_NEWS_SUBSCR_FORM_ID}/feedback`;
   return axios.post(
     fullUrl,
     {

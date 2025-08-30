@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Block, Box } from 'react-bulma-components';
 import { User } from '../../types/User';
-import { UseGetAllUsersApi } from '../../api/getAllUsers';
+import { getAllUsersApi } from '../../api/getAllUsers';
 import { ModalLoader } from '../../components/ModalLoader';
 import { ErrorLoadAPINotice } from '../../components/ErrorLoadAPINotice';
 import { parseUsersAPI } from '../../utils/userManagmentHelper';
@@ -10,7 +10,7 @@ import { AuthLevels } from '../../types/AuthLevels';
 
 export const PlastunyManagmentPage = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const { data, loading, error, refetch } = UseGetAllUsersApi();
+  const { data, loading, error, refetch } = getAllUsersApi();
 
   useEffect(() => {
     setUsers(parseUsersAPI(data));
@@ -25,7 +25,6 @@ export const PlastunyManagmentPage = () => {
       refetch().then(res => setUsers(parseUsersAPI(res.data)));
     }
   }
-
   return (
     <Box className="p-0 pb-2 mb-2">
       {error ? (

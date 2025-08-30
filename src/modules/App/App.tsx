@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './App.module.scss';
 import '../../styles/main.scss';
 import { Outlet } from 'react-router-dom';

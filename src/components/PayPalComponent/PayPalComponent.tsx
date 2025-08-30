@@ -1,3 +1,4 @@
+import React from 'react';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
 // Renders errors or successfull transactions on the screen.
@@ -45,7 +46,6 @@ const PayPalComponent: React.FC<Props> = ({ onAction }) => {
         //   console.error(error);
         // }
         onAction();
-
         return '';
       }}
       onApprove={async (data, actions) => {
@@ -89,7 +89,6 @@ const PayPalComponent: React.FC<Props> = ({ onAction }) => {
             );
           }
         } catch (error) {
-          // eslint-disable-next-line no-console
           console.error(error);
         }
       }}

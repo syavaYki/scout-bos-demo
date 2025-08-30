@@ -7,49 +7,49 @@ import {
   faWrench,
   faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
-import { ValidRoutes } from '../../types/validRoutes';
+import { VALID_ROUTES } from '../../types/validRoutes';
 import { CRUMBS_NAME_MAP } from './breadcrumbs';
 
 const profile = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.PROFILE],
-  link: ValidRoutes.PROFILE,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.PROFILE],
+  link: VALID_ROUTES.PROFILE,
   icon: faUser,
 };
 const skhoduny = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.SKHODYNY],
-  link: ValidRoutes.SKHODYNY,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.SKHODYNY],
+  link: VALID_ROUTES.SKHODYNY,
   icon: faUsers,
 };
 const payment = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.MAKE_PAYMENT],
-  link: ValidRoutes.MAKE_PAYMENT,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.MAKE_PAYMENT],
+  link: VALID_ROUTES.MAKE_PAYMENT,
   icon: faDollarSign,
 };
 
 const userDB = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.USERS_MANAGMENT],
-  link: ValidRoutes.USERS_MANAGMENT,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.USERS_MANAGMENT],
+  link: VALID_ROUTES.USERS_MANAGMENT,
   icon: faDatabase,
 };
 const plastunyDB = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.PLASTUNY_MANAGMENT],
-  link: ValidRoutes.PLASTUNY_MANAGMENT,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.PLASTUNY_MANAGMENT],
+  link: VALID_ROUTES.PLASTUNY_MANAGMENT,
   icon: faDatabase,
 };
 const paymemnts = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.PAYMENTS],
-  link: ValidRoutes.PAYMENTS,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.PAYMENTS],
+  link: VALID_ROUTES.PAYMENTS,
   icon: faMoneyBill1Wave,
 };
 
 const mayPaymemnts = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.MY_PAYMENTS],
-  link: ValidRoutes.MY_PAYMENTS,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.MY_PAYMENTS],
+  link: VALID_ROUTES.MY_PAYMENTS,
   icon: faMoneyBill1Wave,
 };
 const devTools = {
-  name: CRUMBS_NAME_MAP[ValidRoutes.DEV_TEST],
-  link: ValidRoutes.DEV_TEST,
+  name: CRUMBS_NAME_MAP[VALID_ROUTES.DEV_TEST],
+  link: VALID_ROUTES.DEV_TEST,
   icon: faWrench,
 };
 

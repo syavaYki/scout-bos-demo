@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Form, Heading, Icon } from 'react-bulma-components';
 import { ModalError } from '../../components/ModalError';
 import LogInAPI from '../../api/login';
@@ -20,7 +20,7 @@ export const LoginPage = () => {
     if (loggedIn === undefined) {
       dispatch(authActions.init());
     }
-  }, [dispatch, loggedIn]);
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,9 +56,16 @@ export const LoginPage = () => {
       >
         <Heading className="has-text-link">Please Log in.</Heading>
 
-        <form method="POST" onSubmit={e => handleSubmit(e)} id="logInForm">
+        <form
+          method="POST"
+          onSubmit={e => handleSubmit(e)}
+          id="logInForm"
+        >
           <Form.Field>
-            <Form.Label color="primary" className="has-text-link">
+            <Form.Label
+              color="primary"
+              className="has-text-link"
+            >
               Username
             </Form.Label>
             <Form.Control>
@@ -70,14 +77,20 @@ export const LoginPage = () => {
                 type="text"
               />
 
-              <Icon align="left" size="small">
+              <Icon
+                align="left"
+                size="small"
+              >
                 <i className="fas fa-user" />
               </Icon>
             </Form.Control>
           </Form.Field>
 
           <Form.Field>
-            <Form.Label color="primary" className="has-text-link">
+            <Form.Label
+              color="primary"
+              className="has-text-link"
+            >
               Password
             </Form.Label>
             <Form.Control>
@@ -90,7 +103,10 @@ export const LoginPage = () => {
                 status="focus"
               />
 
-              <Icon align="left" size="small">
+              <Icon
+                align="left"
+                size="small"
+              >
                 <i className="fa fa-lock" />
               </Icon>
             </Form.Control>
@@ -98,7 +114,11 @@ export const LoginPage = () => {
 
           <Form.Field>
             <Form.Control className="is-flex mt-6">
-              <Button color="link" type="submit" form="logInForm">
+              <Button
+                color="link"
+                type="submit"
+                form="logInForm"
+              >
                 Login
               </Button>
 

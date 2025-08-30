@@ -1,4 +1,5 @@
-import { useCallback, useEffect } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
 import style from './Header.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import classNames from 'classnames';
@@ -20,17 +21,7 @@ export const Header = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const onLinkClick = useCallback(
-    () => dispatch(menuActions.setMenuVisibility(false)),
-    [dispatch],
-  );
-
-  useEffect(
-    () => () => {
-      onLinkClick();
-    },
-    [location, onLinkClick],
-  );
+  useEffect(() => onLinkClick(), [location]);
 
   useEffect(() => {
     window.addEventListener('resize', function () {
@@ -38,7 +29,11 @@ export const Header = () => {
         dispatch(menuActions.setMenuVisibility(false));
       }
     });
-  }, [dispatch]);
+  }, []);
+
+  function onLinkClick() {
+    dispatch(menuActions.setMenuVisibility(false));
+  }
 
   return (
     <Navbar
@@ -77,7 +72,10 @@ export const Header = () => {
               style.custom_hover,
             )}
           >
-            <FontAwesomeIcon icon={faHandHoldingDollar} size="2x" />
+            <FontAwesomeIcon
+              icon={faHandHoldingDollar}
+              size="2x"
+            />
           </Button>
 
           <a
@@ -150,7 +148,10 @@ export const Header = () => {
               )}
             >
               <span className={classNames('icon')}>
-                <FontAwesomeIcon icon={faHandHoldingDollar} size="2x" />
+                <FontAwesomeIcon
+                  icon={faHandHoldingDollar}
+                  size="2x"
+                />
               </span>
               <span>Допомога</span>
             </span>

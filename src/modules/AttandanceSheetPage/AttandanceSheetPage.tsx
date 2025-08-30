@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  UseCreateAttandanceSheetAPI,
-  UseGetAttendanceSheetsByIDAPI,
-  UseUpdateAttandanceSheetAPI,
+  createAttandanceSheetAPI,
+  getAttendanceSheetsByIDAPI,
+  updateAttandanceSheetAPI,
 } from '../../api/getAttandanceSheets';
 import {
   AttandancSheetsData,
@@ -21,7 +21,7 @@ import {
   CheckboxEditorModule,
 } from 'ag-grid-community';
 import { ModalSuccess } from '../../components/ModalSuccess';
-import { UseGetAllUsersApi } from '../../api/getAllUsers';
+import { getAllUsersApi } from '../../api/getAllUsers';
 import { parseUsersAPI } from '../../utils/userManagmentHelper';
 import { ModalChoice } from '../../components/ModalChoice';
 import { AuthLevels } from '../../types/AuthLevels';
@@ -63,19 +63,17 @@ export const AttandanceSheetPage = () => {
 
   const [date, setDate] = useState<string | undefined>('');
 
-  const { data: usersData } = UseGetAllUsersApi();
+  const { data: usersData } = getAllUsersApi();
 
-  const { data: sheetData, error: getError } = UseGetAttendanceSheetsByIDAPI(
+  const { data: sheetData, error: getError } = getAttendanceSheetsByIDAPI(
     Number(sheetId),
   );
-  const [createSheet, { error: createError }] = UseCreateAttandanceSheetAPI();
-  const [updateSheet, { error: errorUpdateSheet }] =
-    UseUpdateAttandanceSheetAPI();
+  const [createSheet, { error: createError }] = createAttandanceSheetAPI();
+  const [updateSheet, { error: errorUpdateSheet }] = updateAttandanceSheetAPI();
 
   useEffect(() => {
     if (sheetData && mode !== TableModes.CREATE) {
       const tableDataParsed = parseTableItems(sheetData);
-
       if (tableDataParsed) {
         setDate(() => tableDataParsed?.title);
 
@@ -84,7 +82,7 @@ export const AttandanceSheetPage = () => {
         }
       }
     }
-  }, [sheetData, mode]);
+  }, [sheetData]);
 
   useEffect(() => {
     if (usersData && mode === TableModes.CREATE) {
@@ -102,7 +100,7 @@ export const AttandanceSheetPage = () => {
       setTableData(userDataParsed);
       setDate(new Date().toDateString());
     }
-  }, [sheetData, mode, usersData]);
+  }, [usersData]);
 
   useEffect(() => {
     if (getError) {
@@ -114,26 +112,9 @@ export const AttandanceSheetPage = () => {
     }
   }, [errorUpdateSheet, getError, createError]);
 
-  function handleTableAction(data: AttandancSheetsData) {
-    setTableActionData(data);
+  function handleTableAction(tableData: AttandancSheetsData) {
+    setTableActionData(tableData);
     setChoiceVisible(true);
-  }
-
-  function handleSuccess() {
-    switch (mode) {
-      case TableModes.CREATE:
-        setSuccessMessage('Ви успішно записали відвідування пластуні !!!');
-        break;
-
-      case TableModes.EDIT:
-        setSuccessMessage(
-          'Ви успішно обновили запис відвідування пластуні !!!',
-        );
-        break;
-
-      default:
-        break;
-    }
   }
 
   async function handleUpdateAttandance(data: AttandancSheetsData) {
@@ -163,6 +144,23 @@ export const AttandanceSheetPage = () => {
     }
   }
 
+  function handleSuccess() {
+    switch (mode) {
+      case TableModes.CREATE:
+        setSuccessMessage('Ви успішно записали відвідування пластуні !!!');
+        break;
+
+      case TableModes.EDIT:
+        setSuccessMessage(
+          'Ви успішно обновили запис відвідування пластуні !!!',
+        );
+        break;
+
+      default:
+        break;
+    }
+  }
+
   function handleChoice(result: boolean) {
     if (result && tableActionData) {
       switch (mode) {
@@ -178,7 +176,6 @@ export const AttandanceSheetPage = () => {
           break;
       }
     }
-
     setTableActionData(() => undefined);
     setChoiceVisible(false);
   }

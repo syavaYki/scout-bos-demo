@@ -14,14 +14,12 @@ export const ModalPaymentTable: React.FC<Props> = ({
   onClose,
 }) => {
   const [isActiveState, setIsActiveState] = useState(isActive);
-
   useEffect(() => setIsActiveState(isActive), [isActive]);
 
   function handleClose() {
     if (onClose) {
       onClose();
     }
-
     setIsActiveState(false);
   }
 
@@ -46,7 +44,10 @@ export const ModalPaymentTable: React.FC<Props> = ({
           </header>
 
           <section className="modal-card-body py-3 is-multiline">
-            <UsersPaymentTable user={user} compactView={true} />
+            <UsersPaymentTable
+              user={user}
+              compactView={true}
+            />
           </section>
 
           <footer className="modal-card-foot is-flex-direction-row-reverse py-3">

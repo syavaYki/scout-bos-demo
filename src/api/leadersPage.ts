@@ -22,10 +22,9 @@ const GET_LEADERS = gql`
   }
 `;
 
-export const UseGetLeadersApi = () => {
+export const getLeadersApi = () => {
   return useQuery(GET_LEADERS, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Get Leader error:', error);
     },
   });

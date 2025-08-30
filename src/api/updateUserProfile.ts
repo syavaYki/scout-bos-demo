@@ -61,10 +61,11 @@ const USER_UPDATE = gql`
   }
 `;
 
-export default function UseUpdateUserProfile() {
+export default function updateUserProfile() {
   return useMutation(USER_UPDATE, {
+    // No need to refetch here; you're getting the updated user in the mutation response
     onError: error => {
-      // eslint-disable-next-line no-console
+      // Use the provided 'error' parameter
       console.error('Update mutation error:', error);
     },
   });

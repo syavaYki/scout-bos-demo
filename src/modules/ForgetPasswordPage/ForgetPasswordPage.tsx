@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Form, Heading, Icon } from 'react-bulma-components';
 import { ModalLoader } from '../../components/ModalLoader';
 import { ModalError } from '../../components/ModalError';
-import USeResetPasswordAPI from '../../api/resetPassword';
+import resetPasswordAPI from '../../api/resetPassword';
 
 export const ForgetPasswordPage = () => {
   const [userName, setUserName] = useState('');
   const [sent, setSent] = useState(false);
 
-  const [sendPasswordResetEmail, { loading, error }] = USeResetPasswordAPI();
+  const [sendPasswordResetEmail, { loading, error }] = resetPasswordAPI();
 
   function resetSent() {
     setSent(false);
@@ -21,9 +21,8 @@ export const ForgetPasswordPage = () => {
         username: userName.toLocaleLowerCase(),
       },
     })
-      .catch(error2 => {
-        // eslint-disable-next-line no-console
-        console.error(error2);
+      .catch(error => {
+        console.error(error);
       })
       .finally(() => setSent(true));
   }
@@ -41,7 +40,10 @@ export const ForgetPasswordPage = () => {
 
       <Box className="has-background-primary m-3">
         {sent && !error ? (
-          <Heading subtitle className="has-text-link">
+          <Heading
+            subtitle
+            className="has-text-link"
+          >
             Якщо користувач існує то повідомлення було відправлено на
             зарестрований email, у випадку якщо не можете знайти його перевірте
             папку SPAM.
@@ -50,7 +52,10 @@ export const ForgetPasswordPage = () => {
           <>
             <Heading className="has-text-link"> Забув Пароль</Heading>
 
-            <Heading subtitle className="has-text-link">
+            <Heading
+              subtitle
+              className="has-text-link"
+            >
               Введи Username який зареєстрований за Пластуном
             </Heading>
 
@@ -60,7 +65,10 @@ export const ForgetPasswordPage = () => {
               id="forgotPasswordForm"
             >
               <Form.Field>
-                <Form.Label color="primary" className="has-text-link">
+                <Form.Label
+                  color="primary"
+                  className="has-text-link"
+                >
                   Username
                 </Form.Label>
 
@@ -73,7 +81,10 @@ export const ForgetPasswordPage = () => {
                     type="text"
                   />
 
-                  <Icon align="left" size="small">
+                  <Icon
+                    align="left"
+                    size="small"
+                  >
                     <i className="fas fa-user" />
                   </Icon>
                 </Form.Control>
@@ -81,7 +92,11 @@ export const ForgetPasswordPage = () => {
 
               <Form.Field>
                 <Form.Control className="is-flex mt-6">
-                  <Button color="link" type="submit" form="forgotPasswordForm">
+                  <Button
+                    color="link"
+                    type="submit"
+                    form="forgotPasswordForm"
+                  >
                     Відправити оновлення паролю
                   </Button>
                 </Form.Control>

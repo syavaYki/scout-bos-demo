@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box } from 'react-bulma-components';
 import style from './EventItem.module.scss';
 import classNames from 'classnames';
@@ -11,7 +12,6 @@ type Props = {
 export const EventItem: React.FC<Props> = ({ date, title, text }) => {
   const eventDateTime =
     date.getDate() + ' ' + date.toLocaleString('default', { month: 'long' });
-
   return (
     <Box
       className={classNames(

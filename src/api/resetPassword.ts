@@ -10,10 +10,9 @@ const RESET_PASSWORD = gql`
   }
 `;
 
-export default function USeResetPasswordAPI() {
+export default function resetPasswordAPI() {
   return useMutation(RESET_PASSWORD, {
     onError: e => {
-      // eslint-disable-next-line no-console
       console.error(e);
     },
   });

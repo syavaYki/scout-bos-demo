@@ -52,45 +52,43 @@ const DELETE_SHEET_BY_ID = gql`
   }
 `;
 
-export const UseGetAttendanceSheetsAPI = () => {
+export const getAttendanceSheetsAPI = () => {
   return useQuery(GET_ATTENDNCE_SHEETS, {
     fetchPolicy: 'network-only',
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Get All Attandance error:', error);
     },
   });
 };
 
-export const UseGetAttendanceSheetsByIDAPI = (id: number) => {
+export const getAttendanceSheetsByIDAPI = (id: number) => {
   return useQuery(GET_SHEET_BY_ID, {
     variables: { id },
     fetchPolicy: 'network-only',
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Get By ID Attandance error:', error);
     },
   });
 };
 
-export function UseUpdateAttandanceSheetAPI() {
+export function updateAttandanceSheetAPI() {
   return useMutation(UPDATE_ATTENDANCE_MUTATION, {
     onError: error => {
-      // eslint-disable-next-line no-console
+      // Use the provided 'error' parameter
       console.error('Update Attandance mutation error:', error);
     },
   });
 }
 
-export function UseCreateAttandanceSheetAPI() {
+export function createAttandanceSheetAPI() {
   return useMutation(CREATE_ATTENDANCE_MUTATION, {
     onError: error => {
-      // eslint-disable-next-line no-console
+      // Use the provided 'error' parameter
       console.error('Create Attandance mutation error:', error);
     },
   });
 }
 
-export function UseDeleteAttandanceSheetAPI() {
+export function deleteAttandanceSheetAPI() {
   return useMutation(DELETE_SHEET_BY_ID);
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Block, Box, Button, Container, Heading } from 'react-bulma-components';
 import { submitNewSubscriber } from '../../api/newsSubscriber';
@@ -15,7 +15,6 @@ export function SubscribeNews() {
 
     try {
       const response = await submitNewSubscriber(email);
-
       if (response.data.status !== 'mail_sent') {
         setShowError(true);
       } else {
@@ -24,7 +23,6 @@ export function SubscribeNews() {
     } catch (error) {
       setShowError(true);
     }
-
     setEmail('');
   };
 
@@ -73,7 +71,10 @@ export function SubscribeNews() {
                     onChange={e => setEmail(e.target.value)}
                   />
 
-                  <Button type="submit" className="button px-3 ml-5">
+                  <Button
+                    type="submit"
+                    className="button px-3 ml-5"
+                  >
                     Підписатись
                   </Button>
                 </form>

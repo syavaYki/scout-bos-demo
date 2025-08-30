@@ -19,6 +19,5 @@ export function parseLeadersApi(data: LeaderAPIData): LeaderData[] | [] {
       });
     }
   }
-
   return parsedData;
 }

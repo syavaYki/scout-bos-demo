@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import style from './FooterElem.module.scss';
 import { Columns, Container, Footer } from 'react-bulma-components';
@@ -39,7 +40,10 @@ export const FooterElem = () => {
                       )}
                     >
                       <span className={classNames('icon is-large')}>
-                        <FontAwesomeIcon icon={menuLink.icon} size="2x" />
+                        <FontAwesomeIcon
+                          icon={menuLink.icon}
+                          size="2x"
+                        />
                       </span>
 
                       <span className="has-text-centered">{menuLink.name}</span>
@@ -51,7 +55,10 @@ export const FooterElem = () => {
           </Columns.Column>
 
           <Columns.Column className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-            <a href="/" className="is-hidden is-flex-desktop">
+            <a
+              href="/"
+              className="is-hidden is-flex-desktop"
+            >
               <img
                 src="https://wpapi.plastlindenhurst.org/wp-content/uploads/2025/02/Plast-Lindenhurst-LOGO.jpg"
                 className={classNames('', style.logo_decor)}
@@ -62,7 +69,10 @@ export const FooterElem = () => {
 
         <Container className="is-flex is-justify-content-space-evenly">
           <p className="has-text-link">&copy;2025 Plast Lindenhurst</p>
-          <a href="mailto:info@plastlindenhurst.org" className="has-text-link">
+          <a
+            href="mailto:info@plastlindenhurst.org"
+            className="has-text-link"
+          >
             info@plastlindenhurst.org
           </a>
           <div>

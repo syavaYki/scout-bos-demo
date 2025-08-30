@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
@@ -19,9 +19,7 @@ export const LatestPhotoSwiper: React.FC<Props> = ({ imageData }) => {
   const [showModal, setShowModal] = useState(false);
   const [curImgUrl, setcurImgUrl] = useState('');
 
-  if (!imageData) {
-    return null;
-  }
+  if (!imageData) return null;
 
   return (
     <>
@@ -40,7 +38,10 @@ export const LatestPhotoSwiper: React.FC<Props> = ({ imageData }) => {
       >
         {imageData.map(photo => {
           return (
-            <SwiperSlide key={photo.id} className="has-background-primary p-2">
+            <SwiperSlide
+              key={photo.id}
+              className="has-background-primary p-2"
+            >
               <div className="slider_img_container">
                 <img
                   src={photo.url}

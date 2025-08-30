@@ -9,10 +9,9 @@ const GET_USERS = gql`
   }
 `;
 
-export const UseGetAllUsersApi = () => {
+export const getAllUsersApi = () => {
   return useQuery(GET_USERS, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Get All Users error:', error);
     },
   });

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bulma-components';
 import classNames from 'classnames';
 import { ContactUsFormData } from '../../types/ContactUsForm';
@@ -36,13 +36,19 @@ export const ContactUsForm: React.FC<Props> = ({
         'is-active': showState,
       })}
     >
-      <div className="modal-background" onClick={() => onClose()} />
+      <div
+        className="modal-background"
+        onClick={() => onClose()}
+      />
 
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Звяжіться з нами</p>
 
-          <button className="delete" onClick={() => onClose()} />
+          <button
+            className="delete"
+            onClick={() => onClose()}
+          />
         </header>
 
         <section className="modal-card-body columns is-justify-content-center m-0">
@@ -114,7 +120,11 @@ export const ContactUsForm: React.FC<Props> = ({
           </div>
         </section>
         <footer className="modal-card-foot">
-          <Button type="submit" className="button px-4" form="contavtUsForm">
+          <Button
+            type="submit"
+            className="button px-4"
+            form="contavtUsForm"
+          >
             Відправити
           </Button>
         </footer>

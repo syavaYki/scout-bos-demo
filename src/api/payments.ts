@@ -13,7 +13,7 @@ import {
 } from '../types/PaymentsTypes';
 
 // GraphQL Query to get ALL payments (for all users) WITH pagination (same query as before)
-export const GET_ALL_PAYMENTS_QUERY = gql`
+const GET_ALL_PAYMENTS_QUERY = gql`
   query GetAllPayments($first: Int, $after: String) {
     payments(first: $first, after: $after) {
       edges {
@@ -91,25 +91,36 @@ const CREATE_PAYMENT_MUTATION = gql`
   }
 `;
 
-export function UseGetPayments(
+export function getPayments(
   filterUserId: string | undefined = undefined,
 ): PaymentsAPIResult {
   const paymentsPerPage = 500; // Fetch a larger number per page for background loading
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApolloError | undefined>(undefined);
   const [allPayments, setAllPayments] = useState<PaymentEdge[]>([]);
-  const initialQuery = useQuery<PaymentsResponse>(
-    GET_ALL_PAYMENTS_QUERY_WITH_ID,
-    {
+
+  let initialQuery;
+
+  if (filterUserId) {
+    initialQuery = useQuery<PaymentsResponse>(GET_ALL_PAYMENTS_QUERY_WITH_ID, {
       // useQuery for initial load
       variables: {
         first: paymentsPerPage,
         after: null,
-        userId: filterUserId ? filterUserId : null,
+        userId: filterUserId,
       },
       fetchPolicy: 'network-only',
-    },
-  );
+    });
+  } else {
+    initialQuery = useQuery<PaymentsResponse>(GET_ALL_PAYMENTS_QUERY, {
+      // useQuery for initial load
+      variables: {
+        first: paymentsPerPage,
+        after: null,
+      },
+      fetchPolicy: 'network-only',
+    });
+  }
 
   useEffect(() => {
     const fetchAllPages = async () => {
@@ -133,7 +144,6 @@ export function UseGetPayments(
         } else {
           hasNext = false; // No initial data, stop
           setLoading(false);
-
           return;
         }
 
@@ -145,20 +155,16 @@ export function UseGetPayments(
               after: cursor,
             },
 
-            updateQuery: (prevResult, { fetchMoreResult: newPageData }) => {
-              if (!newPageData) {
-                // Use the new name
-                return prevResult;
-              }
-
+            updateQuery: (prevResult, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return prevResult;
               return Object.assign({}, prevResult, {
                 payments: {
                   __typename: prevResult.payments.__typename,
                   edges: [
                     ...prevResult.payments.edges,
-                    ...newPageData.payments.edges, // Use the new name
+                    ...fetchMoreResult.payments.edges,
                   ],
-                  pageInfo: newPageData.payments.pageInfo, // Use the new name
+                  pageInfo: fetchMoreResult.payments.pageInfo,
                 },
               });
             },
@@ -180,7 +186,6 @@ export function UseGetPayments(
         setAllPayments(currentPayments);
       } catch (fetchAllError: unknown) {
         setError(fetchAllError as ApolloError);
-        // eslint-disable-next-line no-console
         console.error('Error fetching all payments:', fetchAllError);
       } finally {
         setLoading(false);
@@ -188,8 +193,7 @@ export function UseGetPayments(
     };
 
     fetchAllPages();
-  }, [initialQuery, filterUserId]);
-
+  }, [initialQuery.fetchMore, initialQuery.data]); // Dependencies: fetchMore and initial data (for potential refetch on data change - though less relevant here)
   return {
     loading,
     error,
@@ -197,10 +201,10 @@ export function UseGetPayments(
   };
 }
 
-export function UseCreateNewPaymentAPI() {
+export function createNewPaymentAPI() {
   return useMutation(CREATE_PAYMENT_MUTATION, {
     onError: error => {
-      // eslint-disable-next-line no-console
+      // Use the provided 'error' parameter
       console.error('Create Payment Log mutation error:', error);
     },
   });

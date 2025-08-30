@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import UseSendEmailAPI from '../../api/sendEmail';
+import React, { useEffect, useState } from 'react';
+import sendEmailAPI from '../../api/sendEmail';
 import { ModalChoice } from '../ModalChoice';
 import classNames from 'classnames';
 import { Form } from 'react-bulma-components';
@@ -18,7 +18,7 @@ export const ModalSendEmailsDB: React.FC<Props> = ({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onClose = () => {},
 }) => {
-  const [sendEmail, { loading }] = UseSendEmailAPI();
+  const [sendEmail, { loading }] = sendEmailAPI();
   const [error, setError] = useState<string[]>([]);
   const [successInfo, setSuccessInfo] = useState<string[]>([]);
   const [isActiveState, SetIsActiveState] = useState(isActive);
@@ -38,7 +38,6 @@ export const ModalSendEmailsDB: React.FC<Props> = ({
   async function handleChoice(result: boolean) {
     const errorArr: string[] = [];
     const infoArr: string[] = [];
-
     if (result) {
       const allEmailSend = emails.map(async email => {
         await sendEmail({
@@ -62,7 +61,6 @@ export const ModalSendEmailsDB: React.FC<Props> = ({
 
       setChoiceVisible(false);
     }
-
     setChoiceVisible(false);
   }
 

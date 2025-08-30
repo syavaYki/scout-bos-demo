@@ -37,7 +37,7 @@ import {
 import { ModalLoader } from '../ModalLoader';
 import { InfoErrorModal } from './InfoErrorModal';
 import { ModalChoice } from '../ModalChoice';
-import { ValidAction } from '../../types/databaseManagmant';
+import { VALID_ACTION } from '../../types/databaseManagmant';
 import { ModalBulkDataUpdate } from '../ModalBulkDataUpdate';
 import { formatOutput } from '../../utils/userManagmentHelper';
 import { useAppSelector } from '../../app/hooks';
@@ -60,7 +60,6 @@ enum NonHighlighColumNames {
 
 function checkIfRowChanged(originalData: User[], rowData: User) {
   const origRow = originalData.find(rw => rw.id === rowData.id);
-
   if (origRow) {
     for (const key of Object.keys(rowData)) {
       if (key !== 'roles') {
@@ -70,7 +69,6 @@ function checkIfRowChanged(originalData: User[], rowData: User) {
       }
     }
   }
-
   return false;
 }
 
@@ -119,7 +117,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
   const [bulkEmailSendVisible, setBulkEmailSendVisible] = useState(false);
   const [paymentsVisible, setPaymentVisibles] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
-
   useEffect(
     () => setRowData(data.map(user => JSON.parse(JSON.stringify(user)))),
     [data],
@@ -152,7 +149,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
           const birthDate = new Date(p.data?.dob);
           // Check if the birthday has occurred this year
           let years = today.getFullYear() - birthDate.getFullYear();
-
           if (
             today.getMonth() < birthDate.getMonth() ||
             (today.getMonth() === birthDate.getMonth() &&
@@ -163,7 +159,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
           return years;
         }
-
         // console.log(new Date() - new Date(p.data?.dob));
         return null;
       },
@@ -237,30 +232,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
   const gridRef = useRef<AgGridReact>(null);
 
-  function cellClass(params: CellClassParams) {
-    // Prevent calculated fields to be highlighted
-    if (
-      Object.values(NonHighlighColumNames).includes(
-        params?.colDef?.headerName as NonHighlighColumNames,
-      )
-    ) {
-      return '';
-    }
-
-    const curItem = data.find(d => d.id === params.data.id);
-    const curKey = params.column.getColId() as keyof User;
-
-    if (curKey === 'roles') {
-      return '';
-    }
-
-    if (curItem && curItem[curKey as keyof User] === params.value) {
-      return '';
-    }
-
-    return 'has-background-danger-light';
-  }
-
   const defaultColDef: ColDef = {
     filter: true,
     editable: authLevelAllow,
@@ -274,7 +245,7 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
   const theme = useMemo<Theme | 'legacy'>(() => {
     return myTheme;
-  }, [myTheme]);
+  }, []);
 
   const onExport = useCallback(() => {
     if (gridRef.current) {
@@ -303,9 +274,28 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
   const onSelectionChanged = useCallback((event: SelectionChangedEvent) => {
     const rows = event.api.getSelectedNodes();
-
     setSelectedRowData(rows);
   }, []);
+
+  function cellClass(params: CellClassParams) {
+    // Prevent calculated fields to be highlighted
+    if (
+      Object.values(NonHighlighColumNames).includes(
+        params?.colDef?.headerName as NonHighlighColumNames,
+      )
+    ) {
+      return '';
+    }
+    const curItem = data.find(d => d.id === params.data.id);
+    const curKey = params.column.getColId() as keyof User;
+    if (curKey === 'roles') {
+      return '';
+    }
+    if (curItem && curItem[curKey as keyof User] === params.value) {
+      return '';
+    }
+    return 'has-background-danger-light';
+  }
 
   function onCellClickedHandler(event: CellClickedEvent) {
     switch (event.column.getId()) {
@@ -321,14 +311,13 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
   async function handleDBUpdate() {
     const infoLogTxt: string[] = [];
     const errorLogTxt: string[] = [];
-
     setLoading(true);
 
     try {
-      const updatePromises = selectedRowData.map(async selctRowData => {
-        if (selctRowData) {
-          if (checkIfRowChanged(data, selctRowData.data)) {
-            const userData = selctRowData.data;
+      const updatePromises = selectedRowData.map(async rowData => {
+        if (rowData) {
+          if (checkIfRowChanged(data, rowData.data)) {
+            const userData = rowData.data;
             const vars: Omit<User, 'email' | 'username' | 'maxCapabilities'> = {
               id: userData?.id,
               plastId: userData?.plastId,
@@ -381,7 +370,7 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
       setInfo(infoLogTxt);
       setError(errorLogTxt);
-    } catch {
+    } catch (error) {
       setError(['Error updating profile']);
     } finally {
       setLoading(false);
@@ -390,11 +379,11 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
 
   function handleBulkAction() {
     switch (bulkAction) {
-      case ValidAction.DOWNLOAD_DATA:
+      case VALID_ACTION.DOWNLOAD_DATA:
         onExport();
         break;
 
-      case ValidAction.BULK_CHANGE:
+      case VALID_ACTION.BULK_CHANGE:
         if (selectedRowData.length > 0) {
           setBulkEditVisible(true);
         } else {
@@ -408,13 +397,12 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
         // });
         break;
 
-      case ValidAction.BULK_EMAIL_SEND:
+      case VALID_ACTION.BULK_EMAIL_SEND:
         if (selectedRowData.length > 0) {
           setBulkEmailSendVisible(true);
         } else {
           setError(['Виберіть користувачів щоб відправити імейл']);
         }
-
         break;
 
       default:
@@ -422,22 +410,19 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
     }
   }
 
-  function handleBulkEditAction(userData: User[]) {
+  function handleBulkEditAction(data: User[]) {
     let newRowData: User[] = [...rowData];
-
-    userData.forEach(row => {
+    data.forEach(row => {
       newRowData = newRowData.filter(rw => rw.id !== row.id);
     });
-    setRowData(() => [...newRowData, ...userData]);
+    setRowData(() => [...newRowData, ...data]);
   }
 
   function parserBulkEmailToSend(): string[] {
-    const bulkData = selectedRowData.map(row => row.data.email);
-
-    if (bulkData.length > 0) {
-      return bulkData;
+    const data = selectedRowData.map(row => row.data.email);
+    if (data.length > 0) {
+      return data;
     }
-
     return [];
   }
   //#endregion
@@ -447,7 +432,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
     if (result && choiceAction?.fn) {
       choiceAction.fn();
     }
-
     setChoiceVisible(false);
   }
 
@@ -455,7 +439,6 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
     setChoiceVisible(true);
     setChoiceAction(action);
   }
-
   //#endregion
   return (
     <>
@@ -544,13 +527,13 @@ export const UserTable: React.FC<Props> = ({ data, onTableAction }) => {
                 Вибери дію
               </option>
 
-              <option value={ValidAction.DOWNLOAD_DATA}>Скачачи дані</option>
+              <option value={VALID_ACTION.DOWNLOAD_DATA}>Скачачи дані</option>
 
-              <option value={ValidAction.BULK_CHANGE}>
+              <option value={VALID_ACTION.BULK_CHANGE}>
                 Оновити дані масово
               </option>
 
-              <option value={ValidAction.BULK_EMAIL_SEND}>
+              <option value={VALID_ACTION.BULK_EMAIL_SEND}>
                 Масова відправка імейлів
               </option>
             </select>

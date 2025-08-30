@@ -6,7 +6,7 @@ import { UrgentNoticeData } from '../../types/UrgenNotice';
 import { accessLocalStorage } from '../../utils/accessLocalStorage';
 import { LocalAccessKeys } from '../../types/LocalAccessKeys';
 import { parseApi } from '../../utils/helperUrgenNotice';
-import { useUrgenNoticeApi } from '../../api/urgenNotice';
+import { urgenNoticeApi } from '../../api/urgenNotice';
 
 export const UrgentNotification: React.FC = () => {
   const [urgenNoticeShow] = React.useState(
@@ -16,8 +16,7 @@ export const UrgentNotification: React.FC = () => {
   const [urgentNoticeData, setUrgentNoticeData] = React.useState<
     UrgentNoticeData | undefined
   >();
-  const { data } = useUrgenNoticeApi();
-
+  const { data } = urgenNoticeApi();
   useEffect(() => setUrgentNoticeData(parseApi(data)), [data]);
 
   return (

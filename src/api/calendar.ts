@@ -13,10 +13,9 @@ const GET_LAST_EVENTS = gql`
   }
 `;
 
-export function UseGetEventsAPI() {
+export function getEventsAPI() {
   return useQuery(GET_LAST_EVENTS, {
     onError: error => {
-      // eslint-disable-next-line no-console
       console.error('Mutation error:', error);
     },
   });

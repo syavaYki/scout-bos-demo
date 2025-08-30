@@ -20,6 +20,6 @@ const SEND_EMAIL = gql`
   }
 `;
 
-export default function UseSendEmailAPI() {
+export default function sendEmailAPI() {
   return useMutation(SEND_EMAIL);
 }

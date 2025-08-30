@@ -1,3 +1,4 @@
+import React from 'react';
 import { Breadcrumb, Container } from 'react-bulma-components';
 import { useLocation } from 'react-router-dom';
 import { CRUMBS_NAME_MAP } from '../constants/breadcrumbs';
@@ -14,10 +15,12 @@ export const Breadcrumbs = () => {
   if (locationArr.length === 0) {
     return <></>;
   }
-
   return (
     <Container className="is-hidden-touch mb-4">
-      <Breadcrumb size="medium" className="has-text-link">
+      <Breadcrumb
+        size="medium"
+        className="has-text-link"
+      >
         <Breadcrumb.Item key="home">
           <a
             href="/"
@@ -34,7 +37,6 @@ export const Breadcrumbs = () => {
         {locationArr.map((crumb: string, index: number) => {
           curLocation = curLocation + `/${crumb}`;
           const crumbName = CRUMBS_NAME_MAP[crumb] || crumb;
-
           return (
             <Breadcrumb.Item
               key={crumb}

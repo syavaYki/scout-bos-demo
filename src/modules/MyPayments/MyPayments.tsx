@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { UsersPaymentTable } from '../../components/UsersPaymentTable';
 import { ErrorLoadAPINotice } from '../../components/ErrorLoadAPINotice';

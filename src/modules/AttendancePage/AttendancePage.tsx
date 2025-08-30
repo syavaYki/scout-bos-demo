@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
   CellClickedEvent,
@@ -19,8 +19,8 @@ ModuleRegistry.registerModules([
 ]);
 import { Block, Button, Container, Heading } from 'react-bulma-components';
 import {
-  UseDeleteAttandanceSheetAPI,
-  UseGetAttendanceSheetsAPI,
+  deleteAttandanceSheetAPI,
+  getAttendanceSheetsAPI,
 } from '../../api/getAttandanceSheets';
 import { attendanceParser } from '../../utils/helperAttendance';
 import { AttandancSheetsData, TableModes } from '../../types/Attandance';
@@ -39,7 +39,11 @@ import { AuthLevels } from '../../types/AuthLevels';
 
 function viewCellRender() {
   return (
-    <FontAwesomeIcon icon={faEye} size="lg" className="has-text-success" />
+    <FontAwesomeIcon
+      icon={faEye}
+      size="lg"
+      className="has-text-success"
+    />
   );
 }
 
@@ -55,7 +59,11 @@ function editCellRender() {
 
 function deleteCellRender() {
   return (
-    <FontAwesomeIcon icon={faTrashCan} size="lg" className="has-text-danger" />
+    <FontAwesomeIcon
+      icon={faTrashCan}
+      size="lg"
+      className="has-text-danger"
+    />
   );
 }
 
@@ -72,8 +80,8 @@ export const AttandancePage = () => {
   const [toDeleteSheet, setToDeleteSheet] = useState<
     AttandancSheetsData | undefined
   >();
-  const { data: attndData, refetch } = UseGetAttendanceSheetsAPI();
-  const [deleteSheet] = UseDeleteAttandanceSheetAPI();
+  const { data: attndData, refetch } = getAttendanceSheetsAPI();
+  const [deleteSheet] = deleteAttandanceSheetAPI();
   const gridRef = useRef<AgGridReact<AttandancSheetsData>>(null);
   const [rowData, setRowData] = useState<AttandancSheetsData[]>();
   const [columnDefs] = useState<ColDef[]>([
@@ -180,6 +188,7 @@ export const AttandancePage = () => {
         })
         .catch(deleteSheetError => {
           setErro(deleteSheetError.message);
+          console.error('Error during deleteSheet mutation:', deleteSheetError);
         });
     }
 
@@ -215,7 +224,10 @@ export const AttandancePage = () => {
       <Container className="p-5">
         <Heading>Відвідування</Heading>
         <Block>
-          <Button onClick={handleNewSheet} disabled={!authLevelAllow}>
+          <Button
+            onClick={handleNewSheet}
+            disabled={!authLevelAllow}
+          >
             Створити нове відвідування
           </Button>
         </Block>

@@ -1,11 +1,16 @@
+import React from 'react';
 import style from './DonatePage.module.scss';
 import { Columns, Container, Heading } from 'react-bulma-components';
+import PayPalComponent from '../../components/PayPalComponent/PayPalComponent';
 
 export const DonatePage = () => {
   return (
     <Container className="is-max-desktop p-5">
       <Container className="pb-3 ">
-        <Heading size={1} spaced>
+        <Heading
+          size={1}
+          spaced
+        >
           Підтримай пласт
         </Heading>
         <Columns>
@@ -36,7 +41,9 @@ export const DonatePage = () => {
         </Columns>
       </Container>
 
-      <Container className={style.bt_container}></Container>
+      <Container className={style.bt_container}>
+        <PayPalComponent />
+      </Container>
     </Container>
   );
 };

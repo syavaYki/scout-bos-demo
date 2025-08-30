@@ -1,3 +1,4 @@
+import React from 'react';
 import { LeaderData } from '../../types/Leaders';
 import { HEADSHOT_PLACEHOLDER_LINK } from '../constants/mediaLink';
 import { Block, Heading } from 'react-bulma-components';
@@ -25,16 +26,26 @@ export const LeaderAvatar: React.FC<
         className="is-flex is-flex-direction-column"
         style={{ height: '100%' }}
       >
-        <Heading size={5} className="has-text-centered mb-2">
+        <Heading
+          size={5}
+          className="has-text-centered mb-2"
+        >
           {fullname}
         </Heading>
 
-        <Heading subtitle size={6} className="m-0">
+        <Heading
+          subtitle
+          size={6}
+          className="m-0"
+        >
           {position}
         </Heading>
 
         <Block className="is-flex is-flex-grow-1">
-          <a className=" is-align-self-flex-end" href={`mailto:${email}`}>
+          <a
+            className=" is-align-self-flex-end"
+            href={`mailto:${email}`}
+          >
             Contact Me
           </a>
         </Block>

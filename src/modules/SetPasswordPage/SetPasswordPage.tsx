@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Form, Heading, Icon } from 'react-bulma-components';
 import { ModalLoader } from '../../components/ModalLoader';
 import { ModalError } from '../../components/ModalError';
@@ -6,14 +6,14 @@ import PasswordStrengthBar from 'react-password-strength-bar';
 import { ModalSuccess } from '../../components/ModalSuccess';
 import classNames from 'classnames';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import UseSetNewPasswordAPI from '../../api/setPassword';
+import setNewPasswordAPI from '../../api/setPassword';
 
 export const SetPasswordPage = () => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [password1Valid, setPassword1Valid] = useState(true);
   const [password2Valid, setPassword2Valid] = useState(true);
-  const [setNewPassword, { loading, error, data }] = UseSetNewPasswordAPI();
+  const [setNewPassword, { loading, error, data }] = setNewPasswordAPI();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const passwordUpdated = Boolean(data?.resetUserPassword?.user?.databaseId);
@@ -28,9 +28,8 @@ export const SetPasswordPage = () => {
         login: login,
         password: password2,
       },
-    }).catch(error2 => {
-      // eslint-disable-next-line no-console
-      console.error(error2);
+    }).catch(error => {
+      console.error(error);
     });
   }
 
@@ -38,7 +37,6 @@ export const SetPasswordPage = () => {
     if (password.length > 8) {
       return true;
     }
-
     return false;
   }
 
@@ -62,7 +60,10 @@ export const SetPasswordPage = () => {
       <Box className="has-background-primary m-3">
         <Heading className="has-text-link"> Забув Пароль</Heading>
 
-        <Heading subtitle className="has-text-link">
+        <Heading
+          subtitle
+          className="has-text-link"
+        >
           Введи Username який зареєстрований за Пластуном
         </Heading>
 
@@ -72,7 +73,10 @@ export const SetPasswordPage = () => {
           id="setPasswordForm"
         >
           <Form.Field>
-            <Form.Label color="primary" className="has-text-link">
+            <Form.Label
+              color="primary"
+              className="has-text-link"
+            >
               Пароль
             </Form.Label>
 
@@ -88,13 +92,15 @@ export const SetPasswordPage = () => {
                 type="password"
                 onChange={e => {
                   const currPassword = e.target.value;
-
                   setPassword1Valid(handlePasswordValidation(currPassword));
                   setPassword1(currPassword);
                 }}
               />
 
-              <Icon align="left" size="small">
+              <Icon
+                align="left"
+                size="small"
+              >
                 <i className="fas fa-lock" />
               </Icon>
 
@@ -119,7 +125,10 @@ export const SetPasswordPage = () => {
           </Form.Field>
 
           <Form.Field>
-            <Form.Label color="primary" className="has-text-link">
+            <Form.Label
+              color="primary"
+              className="has-text-link"
+            >
               Повторіть пароль
             </Form.Label>
 
@@ -133,7 +142,6 @@ export const SetPasswordPage = () => {
                 })}
                 onChange={e => {
                   const currPassword = e.target.value;
-
                   setPassword2Valid(
                     handlePasswordValidation(currPassword) &&
                       currPassword === password1,
@@ -144,7 +152,10 @@ export const SetPasswordPage = () => {
                 type="password"
               />
 
-              <Icon align="left" size="small">
+              <Icon
+                align="left"
+                size="small"
+              >
                 <i className="fas fa-lock" />
               </Icon>
 

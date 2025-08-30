@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Heading } from 'react-bulma-components';
 import style from './LatestActivities.module.scss';
@@ -9,7 +7,7 @@ import { LatestPhotoSwiper } from './LatestPhotoSwiper';
 import { ErrorLoadAPINotice } from '../ErrorLoadAPINotice';
 import { Loader } from '../Loader';
 import { LatestActivitiesPostData } from '../../types/LatestActivity';
-import { UseGetLatestActivitiesAPI } from '../../api/latestActivitySwiper';
+import { getLatestActivitiesAPI } from '../../api/latestActivitySwiper';
 import { parseLatestActivitiesPostData } from '../../utils/helperLatestActivitySwiper';
 
 export const LatestActivities = () => {
@@ -17,7 +15,7 @@ export const LatestActivities = () => {
     LatestActivitiesPostData | undefined
   >();
 
-  const { loading, error, data } = UseGetLatestActivitiesAPI();
+  const { loading, error, data } = getLatestActivitiesAPI();
 
   useEffect(() => {
     setPostData(parseLatestActivitiesPostData(data));

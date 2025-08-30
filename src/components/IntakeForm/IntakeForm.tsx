@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from 'react';
+import React, { useRef, FormEvent } from 'react';
 import {
   Form,
   Button,
@@ -36,11 +36,17 @@ export const IntakeForm: React.FC<Props> = ({
     <>
       {showState && (
         <Container className="is-max-desktop  p-5">
-          <Heading size={3} className="has-text-centered pt-5 pb-2">
+          <Heading
+            size={3}
+            className="has-text-centered pt-5 pb-2"
+          >
             Картка впису до Пласту станиця Lindenhurst
           </Heading>
 
-          <form onSubmit={handleSubmit} ref={formRef}>
+          <form
+            onSubmit={handleSubmit}
+            ref={formRef}
+          >
             <Columns>
               <Columns.Column size={6}>
                 <Form.Field>
@@ -76,7 +82,10 @@ export const IntakeForm: React.FC<Props> = ({
                 <Form.Field>
                   <Form.Label>І&apos;мя дитини (English)</Form.Label>
                   <Form.Control>
-                    <Form.Input type="text" name="child-first-name-eng" />
+                    <Form.Input
+                      type="text"
+                      name="child-first-name-eng"
+                    />
                   </Form.Control>
                 </Form.Field>
               </Columns.Column>
@@ -85,7 +94,10 @@ export const IntakeForm: React.FC<Props> = ({
                 <Form.Field>
                   <Form.Label>Прізвище дитини (English)</Form.Label>
                   <Form.Control>
-                    <Form.Input type="text" name="child-last-name-eng" />
+                    <Form.Input
+                      type="text"
+                      name="child-last-name-eng"
+                    />
                   </Form.Control>
                 </Form.Field>
               </Columns.Column>
@@ -94,7 +106,10 @@ export const IntakeForm: React.FC<Props> = ({
             <Form.Field className="is-flex is-align-items-center">
               <Form.Label className="pr-5">Дата народження</Form.Label>
               <Form.Control>
-                <Form.Input type="date" name="dob" />
+                <Form.Input
+                  type="date"
+                  name="dob"
+                />
               </Form.Control>
             </Form.Field>
 
@@ -108,7 +123,10 @@ export const IntakeForm: React.FC<Props> = ({
                   <Form.Control>
                     <select name="us-schoo-grade">
                       {Array.from({ length: 12 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
+                        <option
+                          key={i + 1}
+                          value={i + 1}
+                        >
                           {i + 1}
                         </option>
                       ))}
@@ -128,7 +146,10 @@ export const IntakeForm: React.FC<Props> = ({
                   <Form.Control>
                     <select name="ua-schoo-grade">
                       {Array.from({ length: 12 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
+                        <option
+                          key={i + 1}
+                          value={i + 1}
+                        >
                           {i + 1}
                         </option>
                       ))}
@@ -139,7 +160,10 @@ export const IntakeForm: React.FC<Props> = ({
             </Form.Field>
 
             <Columns className="mt-4">
-              <Columns.Column size={7} className="mt-auto">
+              <Columns.Column
+                size={7}
+                className="mt-auto"
+              >
                 <Form.Field>
                   <Form.Label>
                     Електрона пошта для реєстарцій рахунку (бажано дитини, якщо
@@ -147,17 +171,26 @@ export const IntakeForm: React.FC<Props> = ({
                   </Form.Label>
 
                   <Form.Control>
-                    <Form.Input type="email" name="your-email" />
+                    <Form.Input
+                      type="email"
+                      name="your-email"
+                    />
                   </Form.Control>
                 </Form.Field>
               </Columns.Column>
 
-              <Columns.Column size={5} className="mt-auto">
+              <Columns.Column
+                size={5}
+                className="mt-auto"
+              >
                 <Form.Field>
                   <Form.Label>Мобільний номер дитини </Form.Label>
 
                   <Form.Control>
-                    <Form.Input type="tel" name="phone-number" />
+                    <Form.Input
+                      type="tel"
+                      name="phone-number"
+                    />
                   </Form.Control>
                 </Form.Field>
               </Columns.Column>
@@ -169,7 +202,10 @@ export const IntakeForm: React.FC<Props> = ({
               <Form.Field>
                 <Form.Label>Вулиця</Form.Label>
                 <Form.Control>
-                  <Form.Input type="text" name="adress-street" />
+                  <Form.Input
+                    type="text"
+                    name="adress-street"
+                  />
                 </Form.Control>
               </Form.Field>
 
@@ -178,7 +214,10 @@ export const IntakeForm: React.FC<Props> = ({
                   <Form.Label>Місто</Form.Label>
 
                   <Form.Control>
-                    <Form.Input type="text" name="adress-town" />
+                    <Form.Input
+                      type="text"
+                      name="adress-town"
+                    />
                   </Form.Control>
                 </Form.Field>
 
@@ -186,7 +225,10 @@ export const IntakeForm: React.FC<Props> = ({
                   <Form.Label>Поштовий Код</Form.Label>
 
                   <Form.Control>
-                    <Form.Input type="text" name="adress-zipcode" />
+                    <Form.Input
+                      type="text"
+                      name="adress-zipcode"
+                    />
                   </Form.Control>
                 </Form.Field>
 
@@ -194,7 +236,10 @@ export const IntakeForm: React.FC<Props> = ({
                   <Form.Label>Штат</Form.Label>
 
                   <Form.Control>
-                    <Form.Input type="text" name="adress-state" />
+                    <Form.Input
+                      type="text"
+                      name="adress-state"
+                    />
                   </Form.Control>
                 </Form.Field>
               </div>
@@ -207,7 +252,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Ім&apos;я батька</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="text" name="parent1-first-name" />
+                      <Form.Input
+                        type="text"
+                        name="parent1-first-name"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -217,7 +265,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Прізвище батька</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="text" name="parent1-last-name" />
+                      <Form.Input
+                        type="text"
+                        name="parent1-last-name"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -229,7 +280,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Email батька</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="email" name="parent1-email" />
+                      <Form.Input
+                        type="email"
+                        name="parent1-email"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -239,7 +293,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Номер телефону батька</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="tel" name="parent1-phone-number" />
+                      <Form.Input
+                        type="tel"
+                        name="parent1-phone-number"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -253,7 +310,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Ім&apos;я мами</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="text" name="parent2-first-name" />
+                      <Form.Input
+                        type="text"
+                        name="parent2-first-name"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -263,7 +323,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Прізвище мами</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="text" name="parent2-last-name" />
+                      <Form.Input
+                        type="text"
+                        name="parent2-last-name"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -275,7 +338,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Email мами</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="email" name="parent2-email" />
+                      <Form.Input
+                        type="email"
+                        name="parent2-email"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -285,7 +351,10 @@ export const IntakeForm: React.FC<Props> = ({
                     <Form.Label>Номер телефону мами</Form.Label>
 
                     <Form.Control>
-                      <Form.Input type="tel" name="parent2-phone-number" />
+                      <Form.Input
+                        type="tel"
+                        name="parent2-phone-number"
+                      />
                     </Form.Control>
                   </Form.Field>
                 </Columns.Column>
@@ -294,7 +363,10 @@ export const IntakeForm: React.FC<Props> = ({
 
             <div>
               <Block>
-                <Heading subtitle className="mt-3 mb-1">
+                <Heading
+                  subtitle
+                  className="mt-3 mb-1"
+                >
                   Заява батьків:
                 </Heading>
 
@@ -319,7 +391,10 @@ export const IntakeForm: React.FC<Props> = ({
                   </li>
                 </ol>
 
-                <Heading subtitle className="mt-5 mb-1">
+                <Heading
+                  subtitle
+                  className="mt-5 mb-1"
+                >
                   Рівночасно зобов’язуюся подбати про те, щоб мій син / моя
                   донька:
                 </Heading>
@@ -357,7 +432,11 @@ export const IntakeForm: React.FC<Props> = ({
               <Form.Field>
                 <Form.Label>Підпис батьків / опікунів</Form.Label>
                 <Form.Control>
-                  <Form.Input type="text" name="parent-signature" required />
+                  <Form.Input
+                    type="text"
+                    name="parent-signature"
+                    required
+                  />
                 </Form.Control>
 
                 <p>

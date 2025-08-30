@@ -6,8 +6,7 @@ export function submitContactUsForm(
   email: string,
   message: string,
 ) {
-  const fullUrl = `${import.meta.env.VITE_REST_FORM_API_BASE_URL}${import.meta.env.VITE_CONTACT_US_FORM_ID}/feedback`;
-
+  const fullUrl = `${process.env.REACT_APP_REST_FORM_API_BASE_URL}${process.env.REACT_APP_CONTACT_US_FORM_ID}/feedback`;
   return axios.post(
     fullUrl,
     {
@@ -15,7 +14,7 @@ export function submitContactUsForm(
       'your-email': email,
       'your-phone': phone,
       'your-message': message,
-      _wpcf7_unit_tag: `wpcf7-f${import.meta.env.VITE_CONTACT_US_FORM_ID}-234`,
+      _wpcf7_unit_tag: `wpcf7-f${process.env.REACT_APP_CONTACT_US_FORM_ID}-234`,
     },
     {
       headers: {

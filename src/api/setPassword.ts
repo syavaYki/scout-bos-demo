@@ -12,10 +12,9 @@ const SET_PASSWORD = gql`
   }
 `;
 
-export default function UseSetNewPasswordAPI() {
+export default function setNewPasswordAPI() {
   return useMutation(SET_PASSWORD, {
     onError: e => {
-      // eslint-disable-next-line no-console
       console.error(e);
     },
   });

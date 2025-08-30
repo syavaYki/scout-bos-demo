@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './NavLinks.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,7 +17,6 @@ export const NavLinks: React.FC = () => {
   function onLinkClick() {
     dispatch(menuActions.setMenuVisibility(false));
   }
-
   return (
     <>
       {linksToRender.map(menuLink => {

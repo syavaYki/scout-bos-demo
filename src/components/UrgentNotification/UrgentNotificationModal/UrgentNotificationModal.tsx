@@ -1,5 +1,5 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import { Heading } from 'react-bulma-components';
 import { UrgentNoticeData } from '../../../types/UrgenNotice';
 import { accessLocalStorage } from '../../../utils/accessLocalStorage';
@@ -11,7 +11,6 @@ type Props = {
 
 export const UrgentNotificationModal: React.FC<Props> = ({ data }) => {
   const [show, setShow] = React.useState(true);
-
   return (
     <div
       className={classNames('modal', {
@@ -34,7 +33,10 @@ export const UrgentNotificationModal: React.FC<Props> = ({ data }) => {
 
         <section className="modal-card-body is-flex m-0 ">
           <div className="modal-content">
-            <Heading subtitle size={6}>
+            <Heading
+              subtitle
+              size={6}
+            >
               {data.body}
             </Heading>
             <p>{data.date?.toLocaleDateString()}</p>

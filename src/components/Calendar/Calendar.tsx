@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import style from './Calendar.module.scss';
@@ -11,7 +11,7 @@ import { parseCalendarEvents } from '../../utils/helperCalendar';
 import { EventData } from '../../types/Calendar';
 import { Loader } from '../Loader';
 import { ErrorLoadAPINotice } from '../ErrorLoadAPINotice';
-import { UseGetEventsAPI } from '../../api/calendar';
+import { getEventsAPI } from '../../api/calendar';
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -19,7 +19,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 export const Calendar = () => {
   const [dateSelected, onChangeDate] = useState<Value>(new Date());
   const [events, setEvents] = useState<EventData[]>([]);
-  const { loading, error, data } = UseGetEventsAPI();
+  const { loading, error, data } = getEventsAPI();
 
   const allEvents = parseCalendarEvents(data);
 
@@ -31,7 +31,7 @@ export const Calendar = () => {
         );
       });
     }
-  }, [dateSelected, data, allEvents]);
+  }, [dateSelected, data]);
 
   if (loading) {
     return (
@@ -89,7 +89,10 @@ export const Calendar = () => {
                 );
               })
           ) : (
-            <Notification color={'info'} light={true}>
+            <Notification
+              color={'info'}
+              light={true}
+            >
               No Event for selected Date
             </Notification>
           )}

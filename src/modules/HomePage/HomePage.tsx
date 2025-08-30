@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './HomePage.module.scss';
 import 'react-calendar/dist/Calendar.css';
 import { Container, Heading, Section } from 'react-bulma-components';
@@ -19,7 +20,11 @@ export const HomePage = () => {
 
       <UrgentNotification />
 
-      <Heading className="m-0 mt-3 p-0" textAlign="center" size={1}>
+      <Heading
+        className="m-0 mt-3 p-0"
+        textAlign="center"
+        size={1}
+      >
         Пласт Лінденхурст
       </Heading>
 

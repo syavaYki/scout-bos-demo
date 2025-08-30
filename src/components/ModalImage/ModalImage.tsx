@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import style from './ModalImage.module.scss';
 
 type Props = {
@@ -24,13 +24,12 @@ export const ModalImage: React.FC<Props> = ({ imageUrl, visible, onClose }) => {
     }
 
     document.addEventListener('click', handleClickOutside);
-
     // document.body.style.overflow = 'hidden'; // Disable scrolling
     return () => {
       document.removeEventListener('click', handleClickOutside);
       // document.body.style.overflow = 'unset'; // Reset on unmount or visibility change
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <div
@@ -40,7 +39,12 @@ export const ModalImage: React.FC<Props> = ({ imageUrl, visible, onClose }) => {
       <div className="modal-background"></div>
       <div className={classNames('modal-content', style.container)}>
         <div className={classNames('p-0 m-0')}>
-          <img className={style.image} src={imageUrl} alt="" ref={targetRef} />
+          <img
+            className={style.image}
+            src={imageUrl}
+            alt=""
+            ref={targetRef}
+          />
         </div>
       </div>
       <button

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   title: string;
@@ -14,14 +14,12 @@ export const ModalChoice: React.FC<Props> = ({
   onAction: onClose,
 }) => {
   const [isActiveState, setIsActiveState] = useState(isActive);
-
   useEffect(() => setIsActiveState(isActive), [isActive]);
 
   function handleClose(res: boolean) {
     if (onClose) {
       onClose(res);
     }
-
     setIsActiveState(false);
   }
 

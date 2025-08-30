@@ -5,7 +5,6 @@ export function parseNewsApi(data: NewsAPIData): NewsData[] | [] {
 
   if (data) {
     const nodes = data?.news?.nodes;
-
     if (nodes && nodes.length > 0) {
       nodes.map(node => {
         parsedData.push({

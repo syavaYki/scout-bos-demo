@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './MainPhotoSwiper.scss';
-import { UseGetMainSwiperPhotoBlocks } from '../../api/mainPhotoSwiper';
+import { getMainSwiperPhotoBlocks } from '../../api/mainPhotoSwiper';
 import { Loader } from '../Loader';
 import { ErrorLoadAPINotice } from '../ErrorLoadAPINotice';
 import { parseMainPhotoSwiperData } from '../../utils/helperMainPhotoSwiper';
@@ -16,7 +16,7 @@ import { ModalImage } from '../ModalImage';
 
 export const MainPhotoSwiper = () => {
   const [blocks, setBlocks] = useState<ImageAPIData[] | []>([]);
-  const { loading, error, data } = UseGetMainSwiperPhotoBlocks();
+  const { loading, error, data } = getMainSwiperPhotoBlocks();
   const [showModal, setShowModal] = useState(false);
   const [curImgUrl, setcurImgUrl] = useState('');
 

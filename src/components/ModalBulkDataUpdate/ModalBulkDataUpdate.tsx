@@ -1,6 +1,6 @@
 import { IRowNode } from 'ag-grid-community';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bulma-components';
 import { ModalChoice } from '../ModalChoice';
 import { User } from '../../types/User';
@@ -40,14 +40,13 @@ export const ModalBulkDataUpdate: React.FC<Props> = ({
       setValidOptions([]);
       setFieldKey('');
     }
-  }, [data, userData]);
+  }, [data]);
 
   function handleChoice(result: boolean) {
     if (result) {
       const updatedData = userData.map(itm => {
         return { ...itm, [fieldKey]: fieldData };
       });
-
       onAction(updatedData);
       onClose();
       setChoiceVisible(false);
@@ -83,7 +82,10 @@ export const ModalBulkDataUpdate: React.FC<Props> = ({
                   onChange={e => setFieldKey(e.target.value)}
                 >
                   {validOptions.map(item => (
-                    <option key={item} value={item}>
+                    <option
+                      key={item}
+                      value={item}
+                    >
                       {item}
                     </option>
                   ))}

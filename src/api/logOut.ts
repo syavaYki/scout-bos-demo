@@ -29,7 +29,6 @@ export const LogOut = () => {
   const logoutMutation = async () => {
     // Remove all data from the store since we are now logged out.
     await apolloClient.clearStore();
-
     return mutation();
   };
 

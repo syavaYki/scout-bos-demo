@@ -15,10 +15,6 @@ const initialValue: AuthData = {
   error: undefined,
 };
 
-export const init = createAsyncThunk('auth/fetch', () => {
-  return getAuthDataClient();
-});
-
 const AuthSlice = createSlice({
   name: 'auth',
   initialState: initialValue,
@@ -50,11 +46,9 @@ const AuthSlice = createSlice({
       state.loggedIn = accessLocalStorage.get(LocalAccessKeys.LOGGEDIN);
 
       let headshotLink = userData?.profileFields?.headshot?.node?.sourceUrl;
-
       if (!headshotLink) {
         headshotLink = HEADSHOOT_DEFAULT;
       }
-
       state.user = {
         ...userData?.profileFields,
         username: userData?.username,
@@ -80,3 +74,7 @@ const AuthSlice = createSlice({
 
 export default AuthSlice.reducer;
 export const { actions } = AuthSlice;
+
+export const init = createAsyncThunk('auth/fetch', () => {
+  return getAuthDataClient();
+});

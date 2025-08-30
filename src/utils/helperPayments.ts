@@ -36,12 +36,10 @@ export function parseAllPaymentDataAPI(
       const dataNode = item.node?.payments;
       const userID = dataNode?.userid;
       const user = getUserByID(userID, users);
-
       if (dataNode && user) {
         parsedData.push(buildTableRow(dataNode, user));
       }
     });
   }
-
   return parsedData;
 }

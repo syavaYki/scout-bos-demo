@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Columns, Container, Heading, Loader } from 'react-bulma-components';
-import { UseGetNewsAPI } from '../../api/news';
+import { getNewsAPI } from '../../api/news';
 import { parseNewsApi } from '../../utils/helperNews';
 import { NewsData } from '../../types/NewsData';
 import classNames from 'classnames';
@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const News = () => {
   const [news, setNews] = useState<NewsData[]>([]);
-  const { loading, error, data } = UseGetNewsAPI();
+  const { loading, error, data } = getNewsAPI();
 
   useEffect(() => setNews(parseNewsApi(data)), [data]);
 
@@ -27,7 +27,10 @@ export const News = () => {
         >
           {news.map(theNews => {
             return (
-              <div key={uuidv4()} className="is-flex">
+              <div
+                key={uuidv4()}
+                className="is-flex"
+              >
                 <Columns>
                   <Columns.Column>
                     <Heading> {theNews.title}</Heading>
@@ -51,7 +54,10 @@ export const News = () => {
       )}
 
       {error && (
-        <Heading size={1} color="danger">
+        <Heading
+          size={1}
+          color="danger"
+        >
           Помилка
         </Heading>
       )}

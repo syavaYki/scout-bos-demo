@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -19,7 +19,7 @@ export const ProtectedRoute: React.FC<Props> = ({ redirectPath = 'login' }) => {
     if (loggedIn === undefined || !user) {
       dispatch(authActions.init());
     }
-  }, [location, dispatch, loggedIn, user]);
+  }, [location]);
 
   if (loading) {
     return <Loader />;
@@ -30,7 +30,12 @@ export const ProtectedRoute: React.FC<Props> = ({ redirectPath = 'login' }) => {
   }
 
   if (!loggedIn) {
-    return <Navigate to={redirectPath} replace />;
+    return (
+      <Navigate
+        to={redirectPath}
+        replace
+      />
+    );
   }
 
   return <Outlet />;

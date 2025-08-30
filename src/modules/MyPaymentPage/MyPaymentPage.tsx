@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { Block, Box, Columns, Form, Heading } from 'react-bulma-components';
+import {
+  Block,
+  Box,
+  Button,
+  Columns,
+  Form,
+  Heading,
+} from 'react-bulma-components';
 import { ModalError } from '../../components/ModalError';
 import { ModalSuccess } from '../../components/ModalSuccess';
 import { ModalLoader } from '../../components/ModalLoader';
+import { createNewPaymentAPI } from '../../api/payments';
+import { validateDate } from '../../utils/dateHelper';
 import PayPalComponent from '../../components/PayPalComponent/PayPalComponent';
 
 enum PaymentTypes {
@@ -14,6 +23,7 @@ enum PaymentTypes {
 
 export const MyPaymentPage = () => {
   const { user } = useAppSelector(state => state.auth);
+  const [createPayment, { error: logError }] = createNewPaymentAPI();
   const [selectedPaymentType, setSelectedPaymentType] = useState<PaymentTypes>(
     PaymentTypes.yearly,
   );
@@ -21,9 +31,45 @@ export const MyPaymentPage = () => {
   const [comment, setComment] = useState('');
   const [otherVal, setOtherVal] = useState<number>(0);
   const [otherValSelDisbale, setOtherValSelDisbale] = useState(true);
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+  async function handlePayment() {
+    if (!otherValSelDisbale) {
+      setSelectedPaymentAmount(otherVal);
+    }
+
+    setLoading(true);
+    await new Promise(resolve => {
+      return setTimeout(resolve, 1000);
+    })
+      .then(async () => {
+        // setPaymentCompleted(true);
+        // throw new Error('Sorry, Under development!!!');
+        // Log the payments
+        const vars = {
+          paymentAmount: selectedPaymentAmount,
+          paymentComment: comment,
+          paymentDate: validateDate(new Date().toISOString()),
+          paymentType: selectedPaymentType,
+          paymentUserId: user?.id,
+        };
+        await createPayment({
+          variables: vars,
+        });
+        if (logError) {
+          throw new Error(
+            "Сталась помилка при записі оплати. Зв'яжіться з адміністратором щоб підтвердити що платіж зареєстровано.",
+          );
+        }
+      })
+      .catch((error: Error) => {
+        setError(error.message);
+        setLoading(false);
+      })
+      .finally(() => setLoading(false));
+  }
 
   return (
     <>
@@ -47,7 +93,10 @@ export const MyPaymentPage = () => {
         <Heading weight="bold">Оплата</Heading>
         <Block>
           <Block className="is-flex">
-            <Heading subtitle className="pr-2">
+            <Heading
+              subtitle
+              className="pr-2"
+            >
               Користувач:
             </Heading>
             <Heading
@@ -70,7 +119,10 @@ export const MyPaymentPage = () => {
                     }
                   >
                     {Object.values(PaymentTypes).map(value => (
-                      <option key={value} value={value}>
+                      <option
+                        key={value}
+                        value={value}
+                      >
                         {value}
                       </option>
                     ))}
@@ -132,7 +184,6 @@ export const MyPaymentPage = () => {
                       type="number"
                       onChange={e => {
                         const val = Number(e.target.value);
-
                         setOtherVal(val);
                         setSelectedPaymentAmount(val);
                       }}

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { parseLeadersApi } from '../../utils/helperLeaders';
-import { LeaderData, ValidUlad } from '../../types/Leaders';
+import { LeaderData, validUlad } from '../../types/Leaders';
 import { Loader } from '../../components/Loader';
 import { Container, Heading } from 'react-bulma-components';
 import { LeaderAvatar } from '../../components/LeaderAvatar';
-import { UseGetLeadersApi } from '../../api/leadersPage';
+import { getLeadersApi } from '../../api/leadersPage';
 import { ErrorLoadAPINotice } from '../../components/ErrorLoadAPINotice';
 
 function sortLeader(people: LeaderData[]): LeaderData[] {
@@ -14,12 +14,11 @@ function sortLeader(people: LeaderData[]): LeaderData[] {
 
 export const LeadersPage = () => {
   const [leaders, setLeaders] = useState<LeaderData[]>([]);
-  const { loading, error, data } = UseGetLeadersApi();
+  const { loading, error, data } = getLeadersApi();
 
   useEffect(() => {
     if (data) {
       const parserData = parseLeadersApi(data);
-
       setLeaders(parserData);
     }
   }, [data]);
@@ -32,7 +31,7 @@ export const LeadersPage = () => {
     <>
       {!error ? (
         <Container className="my-5">
-          <Heading className="has-text-centered">{ValidUlad.STARSHYNA}</Heading>
+          <Heading className="has-text-centered">{validUlad.STARSHYNA}</Heading>
 
           <div
             style={{ gap: '1.2rem' }}
@@ -40,7 +39,7 @@ export const LeadersPage = () => {
           >
             {sortLeader(
               leaders.filter(leader =>
-                leader.ulad.includes(ValidUlad.STARSHYNA),
+                leader.ulad.includes(validUlad.STARSHYNA),
               ),
             ).map(leader => {
               return (

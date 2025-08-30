@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { Block, Box, Button, Form } from 'react-bulma-components';
 import classNames from 'classnames';
-import UseUpdateUserProfile from '../../api/updateUserProfile';
+import updateUserProfile from '../../api/updateUserProfile';
 import { Loader } from '../../components/Loader';
 import { ModalError } from '../../components/ModalError';
 import { ErrorLoadAPINotice } from '../../components/ErrorLoadAPINotice';
@@ -88,7 +87,11 @@ function createFieldRow(
 
   if (userItemData[key]?.type === 'select') {
     return (
-      <Form.Field key={key} horizontal={true} className="is-align-items-center">
+      <Form.Field
+        key={key}
+        horizontal={true}
+        className="is-align-items-center"
+      >
         <Form.Field.Label>{userItemData[key].fieldName}</Form.Field.Label>
 
         <Form.Field.Body>
@@ -105,11 +108,8 @@ function createFieldRow(
                     if (!prev) {
                       return;
                     }
-
                     const newData = prev[key];
-
                     newData.data = e.target.value;
-
                     return { ...prev, [key]: newData };
                   });
                 }}
@@ -123,7 +123,10 @@ function createFieldRow(
                 </option>
                 {userItemData[key].values?.map((item, index) => {
                   return (
-                    <option key={index} value={item}>
+                    <option
+                      key={index}
+                      value={item}
+                    >
                       {item}
                     </option>
                   );
@@ -137,7 +140,11 @@ function createFieldRow(
   }
 
   return (
-    <Form.Field key={key} horizontal={true} className="is-align-items-center">
+    <Form.Field
+      key={key}
+      horizontal={true}
+      className="is-align-items-center"
+    >
       <Form.Field.Label>{userItemData[key].fieldName}</Form.Field.Label>
 
       <Form.Field.Body>
@@ -153,11 +160,8 @@ function createFieldRow(
                   if (!prev) {
                     return;
                   }
-
                   const newData = prev[key];
-
                   newData.data = e.target.value;
-
                   return { ...prev, [key]: newData };
                 })
               }
@@ -176,20 +180,15 @@ function createFieldRow(
                     if (!prev) {
                       return;
                     }
-
                     const newData = prev[key];
-
                     newData.data = newData.defaulData;
-
                     return { ...prev, [key]: newData };
                   });
                 }
-
                 onEdit((prev: FormEditField | undefined) => {
                   if (!prev) {
                     return;
                   }
-
                   return { ...prev, [key]: !editState[key] };
                 });
               }}
@@ -208,7 +207,7 @@ export const UserProfilePage = () => {
   const [userData, setUserData] = useState<FormFieldData>();
   const [fieldEdit, setFieldEdit] = useState<FormEditField>();
   const [updateProfile, { loading: loadingUpdate, error: errorUpdate }] =
-    UseUpdateUserProfile();
+    updateUserProfile();
   const [showSubmitedNotice, setShowSubmitedNotice] = useState(false);
 
   useEffect(() => {
@@ -418,8 +417,8 @@ export const UserProfilePage = () => {
       } else if (data) {
         setShowSubmitedNotice(true);
       }
-    } catch (error2) {
-      console.error('Error updating profile:', error2);
+    } catch (error) {
+      console.error('Error updating profile:', error);
     }
 
     if (fieldEdit) {
@@ -444,15 +443,13 @@ export const UserProfilePage = () => {
           <ModalLoader isActive={loadingUpdate} />
           <ModalError
             title="Виникла помилка!"
-            body={`Будь ласка перевірте введені дані і спробуте знову,
-    якщо помилка повториться зв'яжіться з адміністратором.`}
+            body="Будь ласка перевірте введені дані і спробуте знову, якщо помилка повториться зв'яжіться з адиіністратором."
             isActive={Boolean(errorUpdate)}
           />
 
           <ModalSuccess
             title="Успішно відправлено."
-            body={`Вашу аплікацію було успішно відправленна,
-              адиіністрація зв'яжеться з вами.`}
+            body="Вашу аплікацію було успішно відправленна, адиіністрація зв'яжеться з вами."
             isActive={showSubmitedNotice}
             onClose={handleSubmitNoticeClose}
           />

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Heading } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 
@@ -7,11 +8,17 @@ import classNames from 'classnames';
 export const AboutSection = () => {
   return (
     <Container className={style.container}>
-      <Heading size={2} className={style.title}>
+      <Heading
+        size={2}
+        className={style.title}
+      >
         Про Пласт
       </Heading>
 
-      <Heading subtitle className={style.subtitle}>
+      <Heading
+        subtitle
+        className={style.subtitle}
+      >
         Пласт – це унікальна організація, що відіграє важливу роль у вихованні
         української молоді. Заснований в далекому 1911 році, він поєднує в собі
         ідеали патріотизму, християнської моралі та скаутського руху. Головна

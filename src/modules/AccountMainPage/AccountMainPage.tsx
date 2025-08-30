@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { Columns } from 'react-bulma-components';
 import { Loader } from '../../components/Loader';
@@ -8,7 +9,6 @@ import { AccountControl } from '../AccountControl';
 
 export const AccountMainPage = () => {
   const { loading, error } = useAppSelector(state => state.auth);
-
   if (loading) {
     return <Loader />;
   }

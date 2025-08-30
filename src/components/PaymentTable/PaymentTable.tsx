@@ -88,7 +88,7 @@ export const PaymentTable: React.FC<Prop> = ({ data, compact = false }) => {
 
   const theme = useMemo<Theme | 'legacy'>(() => {
     return myTheme;
-  }, [myTheme]);
+  }, []);
 
   return (
     <Container>
