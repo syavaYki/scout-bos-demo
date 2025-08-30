@@ -1,0 +1,30 @@
+.mainPhotoSwiper {
+  height: 100%;
+}
+
+.mainPhotoSwiper {
+  & img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-slide {
+    border-radius: 5px;
+    height: auto;
+    width: auto;
+  }
+}
+
+.slider_img_container {
+  position: relative;
+  height: 100%;
+
+  .captions {
+    position: absolute;
+    margin: 1rem;
+  }
+}
+.slider_img {
+  height: 100%;
+}

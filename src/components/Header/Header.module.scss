@@ -1,0 +1,44 @@
+@use 'bulma/sass/utilities/mixins';
+@import '../../styles/main.scss';
+
+.header.full_page {
+  height: 100%;
+}
+
+.nav_bar_container.active {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu_wndw {
+  @include mixins.desktop {
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+  }
+  &.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mixins.touch {
+      flex-grow: 1;
+    }
+  }
+}
+
+.custom_hover_logo {
+  &:hover {
+    @include hoverNoBG;
+    background-color: inherit;
+  }
+}
+
+.custom_hover {
+  @include hover;
+}
+
+img.logo_image {
+  max-height: 3rem;
+}

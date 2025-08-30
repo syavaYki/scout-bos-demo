@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: repeat(2, min-content);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'title title'
+    'datetime textBody'
+    'datetime  textBody';
+}
+
+.title {
+  grid-area: title;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.date_time_container {
+  grid-area: datetime;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.date {
+  white-space: nowrap;
+
+  // border-width: 2px;
+  // border-right-style: solid;
+  // border-left-style: solid;
+}
+
+.time {
+  white-space: nowrap;
+  // grid-area: time;
+  // border-radius: 0 0 0 0.75rem;
+  // border-width: 2px;
+  // border-right-style: solid;
+  // border-bottom-style: solid;
+  // border-left-style: solid;
+}
+
+.textBody {
+  grid-area: textBody;
+  // border-radius: 0 0 0.75rem 0;
+  // border-width: 2px;
+  // border-right-style: solid;
+  // border-bottom-style: solid;
+}

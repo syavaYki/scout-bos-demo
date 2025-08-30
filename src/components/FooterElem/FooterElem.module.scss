@@ -1,0 +1,13 @@
+@use 'bulma/sass/utilities/mixins';
+@import '../../styles/main.scss';
+
+.button {
+  max-height: 80px;
+}
+.logo_decor {
+  max-height: 50rem;
+}
+
+.custom_hover {
+  @include hover;
+}

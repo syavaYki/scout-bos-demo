@@ -1,0 +1,21 @@
+@use 'bulma/sass/utilities/mixins';
+
+.container {
+  &_body {
+    width: 100%;
+    gap: 20px;
+
+    @include mixins.mobile {
+      flex-direction: column !important;
+    }
+  }
+}
+
+.events_container {
+  width: 100%;
+}
+
+.react_calendar {
+  border: none;
+  box-shadow: rgba(9, 10, 12, 0.1) 0px 8px 16px -2px;
+}

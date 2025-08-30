@@ -1,0 +1,22 @@
+@use 'bulma/sass/utilities/mixins';
+@import '../../styles/main';
+
+.latest_photo_swiper {
+  &_container {
+    margin-bottom: $home-page-buttom-margins;
+  }
+
+  height: 400px;
+
+  @include mixins.mobile {
+    height: 350px;
+  }
+
+  @include mixins.tablet-only {
+    height: 400px;
+  }
+
+  @include mixins.desktop {
+    height: 450px;
+  }
+}

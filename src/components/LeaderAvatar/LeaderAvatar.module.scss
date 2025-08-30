@@ -1,0 +1,10 @@
+@import '../../styles/main.scss';
+
+.container {
+  width: 200px;
+  @include hover;
+}
+
+.image {
+  border: 0.4rem solid #f9eae8;
+}

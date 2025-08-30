@@ -1,0 +1,17 @@
+@use 'bulma/sass/utilities/mixins';
+
+.bt_container {
+  @include mixins.mobile {
+    width: 100%;
+  }
+  @include mixins.tablet {
+    width: 75%;
+  }
+}
+
+.bt_ukraine_image {
+  object-fit: contain;
+  @include mixins.mobile {
+    width: 200px;
+  }
+}

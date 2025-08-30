@@ -1,0 +1,32 @@
+export interface User {
+  id: number | undefined;
+  plastId: number | null | undefined;
+  stupin: string | null | undefined;
+  ulad: string | null | undefined;
+  username: string;
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+  email: string | null | undefined;
+  childFirstNameUa: string | null | undefined;
+  childLastNameUa: string | null | undefined;
+  dob: string | null | undefined;
+  uaSchooGrade: string | null | undefined;
+  usSchooGrade: string | null | undefined;
+  adressState: string | null | undefined;
+  adressStreet: string | null | undefined;
+  adressTown: string | null | undefined;
+  adressZipcode: string | null | undefined;
+  parent1FirstName: string | null | undefined;
+  parent1LastName: string | null | undefined;
+  parent1Email: string | null | undefined;
+  phoneNumber: string | null | undefined;
+  parent1PhoneNumber: string | null | undefined;
+  parent2FirstName: string | null | undefined;
+  parent2LastName: string | null | undefined;
+  parent2Email: string | null | undefined;
+  parent2PhoneNumber: string | null | undefined;
+  parentSignature: string | null | undefined;
+  headshot: string | null | undefined;
+  roles: string[] | null | undefined;
+  maxCapabilities: number | null | undefined;
+}

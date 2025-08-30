@@ -1,0 +1,26 @@
+@use 'bulma/sass/utilities/mixins';
+@import '../../styles/main';
+
+.main_photo_swiper {
+  height: 400px;
+
+  @include mixins.mobile {
+    height: 350px;
+  }
+
+  @include mixins.tablet-only {
+    height: 400px;
+  }
+
+  @include mixins.desktop {
+    height: 450px;
+  }
+}
+
+.news_swiper {
+  &_container {
+    display: flex;
+    flex-direction: column;
+  }
+  // height: 400px;
+}
