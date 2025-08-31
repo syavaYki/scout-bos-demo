@@ -113,6 +113,19 @@ export const LoginPage = () => {
           </Form.Field>
 
           <Form.Field>
+            <p
+              color="primary"
+              className="is-size-4 has-text-danger"
+            >
+              Test User Name: testUserDemo
+            </p>
+            <p
+              color="primary"
+              className="is-size-4 has-text-danger"
+            >
+              Password: Test12345678=!
+            </p>
+
             <Form.Control className="is-flex mt-6">
               <Button
                 color="link"
